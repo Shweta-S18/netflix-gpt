@@ -9,7 +9,7 @@
     - redirect to Browse Page
 - Browse(after authentication)
     - Header
-
+    - login
     - Main Movie
         - Trailer in Background 
         - Trailer Title & Description
