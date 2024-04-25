@@ -9,14 +9,16 @@ import {
 } from "firebase/auth";
 
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/userSlice";
+import { USER_AVATAR } from "../utils/constants";
+
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
 
   const name = useRef(null);
   const email = useRef(null);
@@ -40,8 +42,8 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL:
-              "https://th.bing.com/th/id/OIP.cxcqa9RvhGnRd8x3N2oBdgAAAA?w=211&h=216&c=7&r=0&o=5&dpr=1.5&pid=1.7",
+            photoURL: USER_AVATAR,
+              
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -53,7 +55,7 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
+         
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -63,7 +65,6 @@ const Login = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorCode + errorMessage);
-          navigate("/");
         });
     } else {
       //Sign In Logic
@@ -74,13 +75,11 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorCode + errorMessage);
-          navigate("/");
         });
     }
   };
@@ -92,7 +91,6 @@ const Login = () => {
   return (
     <div>
       <Header />
-
       <div className="absolute">
         <img
           src="https://assets.nflxext.com/ffe/siteui/vlv3/9f46b569-aff7-4975-9b8e-3212e4637f16/453ba2a1-6138-4e3c-9a06-b66f9a2832e4/IN-en-20240415-popsignuptwoweeks-perspective_alpha_website_small.jpg"
