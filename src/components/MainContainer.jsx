@@ -6,7 +6,7 @@ const MainContainer = () => {
 
     if(!movies) return; /* if movie is null so don't render anything */
 
-    const mainMovie = movies[3];
+    const mainMovie = movies[2];
     const {original_title, overview, id} = mainMovie
     return (
         <div>

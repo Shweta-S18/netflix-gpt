@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+.hide-scollbar::-webkit-scrollbar{
+   display: none;
+}
+body{
+   overflow-x: hidden;
+}
